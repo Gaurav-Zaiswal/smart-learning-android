@@ -130,10 +130,10 @@ class LoginScreenState extends State<LoginScreen> {
                                         UserSecureStorage.setUserToken(
                                             value.token);
                                         // send user to specific home page based on role
-                                        // return directToHome();
-                                        const SnackBar(
-                                          content: Text("login successfull"),
-                                        );
+                                        return directToHome();
+                                        // const SnackBar(
+                                        //   content: Text("login successfull"),
+                                        // );
                                       } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
@@ -208,26 +208,36 @@ class LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // void directToHome() async {
-  //   String? userToken = await UserSecureStorage.getUserToken();
-  //   // set user details such as isTeacher flag on shared preference
-  //   final isSuccess = await apiService.setUserDetails(userToken!);
+  void directToHome() async {
+    String? userToken = await UserSecureStorage.getUserToken();
+    // set user details such as isTeacher flag on shared preference
+    final isSuccess = await apiService.setUserDetails(userToken!);
 
-  //   if (isSuccess == true) {
-  //     // if the setUserDetails returns true then check is the user is teacher/student
-  //     // and redirect them accordingly
+    if (isSuccess == true) {
+      // if the setUserDetails returns true then check is the user is teacher/student
+      // and redirect them accordingly
 
-  //     SharedPreferences prefs = await SharedPreferences.getInstance();
-  //     if (prefs.getBool('isTeacher') && !prefs.getBool('isStudent')) {
-  //       Get.offAllNamed("/home-teacher");
-  //     } else if (prefs.getBool('isStudent') && !prefs.getBool('isTeacher')) {
-  //       Get.offAllNamed("/home-student");
-  //     }
-  //   }else {
-  //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //       content: Text("Something went wrong while navigating to dashboard!"),
-  //     ));
-  //     throw Exception('field value cannot be null.');
-  //   }
-  // }
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final bool? isTeacher = prefs.getBool('isTeacher');
+      final bool? isStudent = prefs.getBool('isTeacher');
+      // if (prefs.getBool('isTeacher') && !prefs.getBool('isStudent')) {
+      //   Get.offAllNamed("/home-teacher");
+      // } else if (prefs.getBool('isStudent') && !prefs.getBool('isTeacher')) {
+      //   Get.offAllNamed("/home-student");
+      // }
+      if (isTeacher==true && isStudent==false) {
+        Get.offAllNamed("/home-teacher");
+      } else if (isStudent==true && isTeacher==false) {
+        Get.offAllNamed("/home-student");
+      }
+      const SnackBar(content: Text("login successful!"));
+    } else {
+      const sb = SnackBar(
+        content: Text("Something went wrong while loggin in!"),
+      );
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(sb);
+      // throw Exception('field value cannot be null.');
+    }
+  }
 }
