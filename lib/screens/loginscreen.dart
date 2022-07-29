@@ -180,7 +180,7 @@ class LoginScreenState extends State<LoginScreen> {
                                                 Colors.blue),
                                       ),
                                       onPressed: () {
-                                        // Get.offAllNamed("/register-student");
+                                        Get.offAllNamed("/register-student");
                                       },
                                       child: const Text('Register as student'),
                                     ),
@@ -209,25 +209,24 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void directToHome() async {
-    String? userToken = await UserSecureStorage.getUserToken();
+    String? token = await UserSecureStorage.getUserToken();
     // set user details such as isTeacher flag on shared preference
-    final isSuccess = await apiService.setUserDetails(userToken!);
+    final isSuccess = await apiService.setUserDetails(token);
 
     if (isSuccess == true) {
       // if the setUserDetails returns true then check is the user is teacher/student
       // and redirect them accordingly
-
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final bool? isTeacher = prefs.getBool('isTeacher');
-      final bool? isStudent = prefs.getBool('isTeacher');
+      final bool? isStudent = prefs.getBool('isStudent');
       // if (prefs.getBool('isTeacher') && !prefs.getBool('isStudent')) {
       //   Get.offAllNamed("/home-teacher");
       // } else if (prefs.getBool('isStudent') && !prefs.getBool('isTeacher')) {
       //   Get.offAllNamed("/home-student");
       // }
-      if (isTeacher==true && isStudent==false) {
+      if (isTeacher == true && isStudent == false) {
         Get.offAllNamed("/home-teacher");
-      } else if (isStudent==true && isTeacher==false) {
+      } else if (isStudent == true && isTeacher==false) {
         Get.offAllNamed("/home-student");
       }
       const SnackBar(content: Text("login successful!"));
@@ -235,7 +234,7 @@ class LoginScreenState extends State<LoginScreen> {
       const sb = SnackBar(
         content: Text("Something went wrong while loggin in!"),
       );
-      if (!mounted) return;
+      // if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(sb);
       // throw Exception('field value cannot be null.');
     }

@@ -1,4 +1,7 @@
+import 'package:aithon/screens/homescreen_s.dart';
+import 'package:aithon/screens/homescreen_t.dart';
 import 'package:aithon/screens/splash_screen.dart';
+import 'package:aithon/screens/student_registration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -25,10 +28,10 @@ class Aithon extends StatelessWidget {
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         // GetPage(name: "/", page: () => HomeScreen()),
-        // GetPage(name: "/home-teacher", page: () => HomeScreen()), // permananet path for home page techer
-        // GetPage(name: "/home-student", page: () => HomeScreenStudent()),
+        GetPage(name: "/home-teacher", page: () => const HomeScreen()), // permananet path for home page techer
+        GetPage(name: "/home-student", page: () => const HomeScreenStudent()),
         // GetPage(name: "/register-teacher", page: () => TeacherRegistration()),
-        // GetPage(name: "/register-student", page: () => StudentRegistration()),
+        GetPage(name: "/register-student", page: () => const StudentRegistration()),
         GetPage(name: "/login", page: () => const LoginScreen()),
         GetPage(name: "/logout", page: () => const LoginScreen()),
 

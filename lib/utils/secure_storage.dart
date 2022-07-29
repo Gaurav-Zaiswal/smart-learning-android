@@ -14,12 +14,15 @@ class UserSecureStorage {
     }
   }
 
-  static Future<String?> getUserToken() async {
+  static Future<String> getUserToken() async {
     // returns token of currently logged in user
-
+    // String? token = await _userStorage.read(key: _KeyUserToken);
+    // print(token);
+    // return token!;
     try {
       String? token = await _userStorage.read(key: _KeyUserToken);
-      return token;
+      print(token);
+      return token!;
     } catch (e) {
       throw Exception('Something went wrong while reading the cache');
     }

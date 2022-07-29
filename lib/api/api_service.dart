@@ -12,14 +12,13 @@ import 'package:http/http.dart' as http;
 // import 'package:scoreapp/models/home_screen_model.dart';
 
 import 'package:aithon/model/login_model.dart';
-// import 'package:scoreapp/model/register_student_model.dart';
+import 'package:aithon/model/register_student_model.dart';
 // import 'package:scoreapp/model/register_teacher_model.dart';
 // import 'package:scoreapp/model/submitted_assignment_list_model.dart';
 import 'package:aithon/model/user_model.dart';
 // import 'package:scoreapp/screens/create_assignment_t.dart';
 // import 'package:scoreapp/utils/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class APIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
@@ -38,7 +37,6 @@ class APIService {
       throw Exception('Failed to load the Data!');
     }
   }
-
 
   Future setUserDetails(String token) async {
     // this method is used to store basic user details on a local storage
@@ -64,7 +62,10 @@ class APIService {
           prefs.setString('lastName', user.lastName);
           prefs.setBool('isTeacher', user.isTeacher);
           prefs.setBool('isStudent', user.isStudent);
-
+          // print("inside setUserDeatils");
+          // print(prefs.getBool("isTeacher"));
+          // print(prefs.getBool("isStudent"));
+          // print("exiting.......");
           return true;
         } catch (e) {
           throw Exception(e);
@@ -75,6 +76,28 @@ class APIService {
       }
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  Future<RegisterStudentResponseModel> registerStudent(
+      RegisterStudentRequestModel requestModel) async {
+    // endpoint that lets any anonymous user to register as student
+    // String url = "http://192.168.1.100:8000/users/api/student-register/";
+    String url =
+        "https://gauravjaiswal.pythonanywhere.com/users/api/student-register/";
+
+    final response =
+        await http.post(Uri.parse(url), body: requestModel.toJson());
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400) {
+      // invalid username pwd will have 400
+      print("----------------------------------> ${response.statusCode}");
+      return RegisterStudentResponseModel.fromJson(json.decode(response.body));
+    } else {
+      print("----------------------------------> ${response.statusCode}");
+      throw Exception('Failed to load the Data!');
     }
   }
 }
