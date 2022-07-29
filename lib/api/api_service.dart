@@ -20,6 +20,7 @@ import 'package:aithon/model/user_model.dart';
 // import 'package:scoreapp/utils/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class APIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
     //endpoint to let users login
@@ -40,7 +41,7 @@ class APIService {
 
 
   Future setUserDetails(String token) async {
-    // this method is used to store basic userdetaied on a local storage
+    // this method is used to store basic user details on a local storage
     // so that we do not have to call API everytime we need user's details
     // returns boolean True if user's info was successfully written on shared preferences
     try {
@@ -49,7 +50,7 @@ class APIService {
             'https://gauravjaiswal.pythonanywhere.com/users/api/user-info'),
         // Send authorization headers to the backend.
         headers: {
-          HttpHeaders.authorizationHeader: 'token ${token}',
+          HttpHeaders.authorizationHeader: 'token $token',
         },
       );
       if (r.statusCode == 200 || r.statusCode == 201 || r.statusCode == 400) {
