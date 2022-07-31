@@ -232,7 +232,7 @@ class LoginScreenState extends State<LoginScreen> {
       const SnackBar(content: Text("login successful!"));
     } else {
       const sb = SnackBar(
-        content: Text("Something went wrong while loggin in!"),
+        content: Text("Something went wrong while loggin in! field value is null"),
       );
       // if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(sb);

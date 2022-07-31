@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:aithon/api/api_service.dart';
 // import 'package:aithon/controller/classroom_controller.dart';
 // import 'package:aithon/model/classroon_join_model.dart';
-// import 'package:aithon/utils/main_drawer_s.dart';
+import 'package:aithon/utils/main_drawer_s.dart';
 // import 'package:aithon/utils/main_drawer_teacher.dart';
 // import 'dart:ui' as ui;
 // import 'package:aithon/utils/HeaderFooter.dart';
@@ -16,8 +16,8 @@ import 'package:aithon/widgets/class_widget_s.dart';
 class HomeScreenStudent extends StatefulWidget {
   const HomeScreenStudent({Key? key}) : super(key: key);
 
-  final String username;
-  const HomeScreenStudent(this.username);
+  // final String username;
+  // const HomeScreenStudent(this.username, {Key? key}) : super(key: key);
 
   @override
   HomeScreenStudentState createState() => HomeScreenStudentState();
@@ -72,14 +72,14 @@ class HomeScreenStudentState extends State<HomeScreenStudent> {
       // appBar: AppBar(
       //   title: Text('Class Joined'),
       // ),
-      // drawer: MainDrawerStudent(),
+      drawer: MainDrawerStudent(),
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: poupJoin(context),
       //   label: Text("Join"),
       //   splashColor: Colors.grey[400],
       // ),
-      floatingActionButton: const MyFloatingActionButton(),
-
+      // floatingActionButton: const MyFloatingActionButton(),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: 
         // onRefresh: () {},
         CustomScrollView(

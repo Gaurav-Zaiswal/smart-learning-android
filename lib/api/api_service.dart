@@ -170,9 +170,9 @@ class APIService {
       throw Exception(
           'forbidden: You do not have permission to join the classroom');
     } else {
-      // print(token);
-      // print(
-      //     "----------------------->>>>>>>>> ${response.statusCode}");
+      print(token);
+      print(
+          "----------------------->>>>>>>>> ${response.statusCode}");
       throw Exception("Failed to join the classroom");
     }
   }

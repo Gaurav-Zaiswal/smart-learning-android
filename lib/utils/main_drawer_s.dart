@@ -14,11 +14,11 @@ class MainDrawerStudent extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical:30),
+            padding: const EdgeInsets.symmetric(vertical:30),
             color: Theme.of(context).primaryColor,
             child: Center(
               child: Column(
-                children: [
+                children:const [
                   Text(
                     'Welcome back!',
                     style: TextStyle(fontSize: 20, color: Colors.white),
@@ -28,42 +28,32 @@ class MainDrawerStudent extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text(
-              'Home',
+            leading: const Icon(Icons.person),
+            title: const Text(
+              'Profile',
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
             onTap: () {
-              Get.toNamed("/home-student");
+              Get.toNamed("/profile-student"); // navigate to profile 
             },
           ),
           ListTile(
-            leading: Icon(Icons.class_),
-            title: Text(
-              'Classroom', // video calling
+            leading: const Icon(Icons.favorite),
+            title: const Text(
+              'For you', // recommendation
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
             onTap: () {
-              Get.toNamed("/classroom");
+              Get.toNamed("/recommendation"); //navigate to recommendation page
             },
           ),
-          // ListTile(
-          //   leading: Icon(Icons.add),
-          //   title: Text(
-          //     'Join a class',
-          //     style: TextStyle(
-          //       fontSize: 18,
-          //     ),
-          //   ),
-          //   onTap: null,
-          // ),
           ListTile(
-            leading: Icon(Icons.logout),
-            title: Text(
+            leading: const Icon(Icons.logout),
+            title: const Text(
               'Logout',
               style: TextStyle(
                 fontSize: 18,

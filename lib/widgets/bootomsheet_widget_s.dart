@@ -19,11 +19,11 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
   TextEditingController classCodeController = TextEditingController();
 
   late ClassroomJoinModel requestModel;
-
+  String temp = "";
   @override
   void initState() {
     super.initState();
-    requestModel = ClassroomJoinModel(classCode: '');
+    requestModel = ClassroomJoinModel();
   }
 
   @override
@@ -59,7 +59,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                                       requestModel.classCode = input!,
                                   validator: (input) => input!.length != 8
                                       ? "Code must be 8 characters long."
-                                      : null,
+                                      : "",
                                   decoration: const InputDecoration(
                                       prefixIcon: Icon(Icons.vpn_key)),
                                 ),
@@ -89,14 +89,11 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                                         });
                                       } else {
                                         ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                            content: Text(
-                                                "Some error occured while trying to join the classroom"),
-                                            dismissDirection:
-                                                DismissDirection.up,
-                                          ));
-                                          // // send user to specific home page based on role
-                                        throw Exception("Validation Failed.");
+                                            .showSnackBar(const SnackBar(
+                                          content: Text(
+                                              "Some error occured while trying to join the classroom!"),
+                                          dismissDirection: DismissDirection.up,
+                                        ));
                                       }
                                     },
                                     child: const Text(

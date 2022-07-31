@@ -9,11 +9,10 @@ ClassroomJoinModel classroomJoinModelFromJson(String str) => ClassroomJoinModel.
 String classroomJoinModelToJson(ClassroomJoinModel data) => json.encode(data.toJson());
 
 class ClassroomJoinModel {
+    String? classCode;
     ClassroomJoinModel({
-      required  this.classCode,
+      this.classCode,
     });
-
-    String classCode;
 
     factory ClassroomJoinModel.fromJson(Map<String, dynamic> json) => ClassroomJoinModel(
         classCode: json["class_code"],
