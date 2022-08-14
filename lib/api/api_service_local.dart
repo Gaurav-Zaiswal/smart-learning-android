@@ -1,6 +1,7 @@
 /*
- * APIs for gauravjaiswal.pythonanywhere.com domain
+ * APIs for localhost
  */
+
 import 'dart:io';
 import "dart:convert";
 
@@ -23,12 +24,16 @@ import 'package:aithon/model/user_model.dart';
 import 'package:aithon/utils/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+String domain = 'http://192.168.0.108:8000';
+
 class APIService {
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
     //endpoint to let users login
 
     // String url = "https://reqres.in/api/login/";
-    String url = "https://gauravjaiswal.pythonanywhere.com/users/api/login/";
+    String url = "$domain/users/api/login/";
+
+    // String url = "http://192.168.0.108:8000/users/api/login/";
     final response =
         await http.post(Uri.parse(url), body: requestModel.toJson());
     if (response.statusCode == 200 ||
@@ -37,6 +42,8 @@ class APIService {
       // Map<String, dynamic> logInResponse = json.decode(response.body);
       return LoginResponseModel.fromJson(json.decode(response.body));
     } else {
+      print(response.toString());
+      print("_________________________________________");
       throw Exception('Failed to load the Data!');
     }
   }
@@ -47,8 +54,7 @@ class APIService {
     // returns boolean True if user's info was successfully written on shared preferences
     try {
       final r = await http.get(
-        Uri.parse(
-            'https://gauravjaiswal.pythonanywhere.com/users/api/user-info'),
+        Uri.parse('192.168.0.108:8000/users/api/user-info'),
         // Send authorization headers to the backend.
         headers: {
           HttpHeaders.authorizationHeader: 'token $token',
@@ -82,7 +88,7 @@ class APIService {
     }
   }
 
- Future<void> removeUserDetails() async {
+  Future<void> removeUserDetails() async {
     // remove user's details from the local storage
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -100,8 +106,7 @@ class APIService {
       RegisterStudentRequestModel requestModel) async {
     // endpoint that lets any anonymous user to register as student
     // String url = "http://192.168.1.100:8000/users/api/student-register/";
-    String url =
-        "https://gauravjaiswal.pythonanywhere.com/users/api/student-register/";
+    String url = "http://127.0.0.1:8000/users/api/student-register/";
 
     final response =
         await http.post(Uri.parse(url), body: requestModel.toJson());
@@ -124,7 +129,7 @@ class APIService {
 
     // final storage = new FlutterSecureStorage();
 
-    String url = "https://gauravjaiswal.pythonanywhere.com/class/api/list/";
+    String url = "http://127.0.0.1:8000/class/api/list/";
     var token = await UserSecureStorage.getUserToken();
     final response = await http.get(
       Uri.parse(url),
@@ -144,11 +149,11 @@ class APIService {
     }
   }
 
- Future<ClassroomJoinModel> joinClassroom(
+  Future<ClassroomJoinModel> joinClassroom(
       ClassroomJoinModel requestModel) async {
     // let studetns join the classroom via a 8 characterslong code
 
-    String url = "https://gauravjaiswal.pythonanywhere.com/class/api/join/";
+    String url = "http://127.0.0.1:8000/class/api/join/";
     var token = await UserSecureStorage.getUserToken();
     // print(requestModel.toJson());
 
@@ -174,12 +179,10 @@ class APIService {
           'forbidden: You do not have permission to join the classroom');
     } else {
       print(token);
-      print(
-          "----------------------->>>>>>>>> ${response.statusCode}");
+      print("----------------------->>>>>>>>> ${response.statusCode}");
       throw Exception("Failed to join the classroom");
     }
   }
-
 
   static Future<List<ClassroomFeedListModel>> getFeeds(String classId) async {
     // get list of enrolled classroom of either teacher or student
@@ -187,8 +190,7 @@ class APIService {
 
     // final storage = new FlutterSecureStorage();
 
-    String url =
-        "https://gauravjaiswal.pythonanywhere.com/feed/api/$classId/list/";
+    String url = "http://127.0.0.1:8000/feed/api/$classId/list/";
     var token = await UserSecureStorage.getUserToken();
     final response = await http.get(
       Uri.parse(url),

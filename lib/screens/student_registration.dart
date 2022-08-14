@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:aithon/api/api_service.dart';
+// import 'package:aithon/api/api_service.dart';  // for production
+import 'package:aithon/api/api_service_local.dart'; // for local 
 // import 'package:scoreapp/models/login_model.dart';
 import 'package:aithon/model/register_student_model.dart';
 // import 'package:aithon/screens/loginscreen.dart';

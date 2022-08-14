@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:aithon/api/api_service.dart';
+// import 'package:aithon/api/api_service.dart';  // for production
+import 'package:aithon/api/api_service_local.dart'; // for local 
 import 'package:aithon/utils/secure_storage.dart';
 
 class MainDrawerStudent extends StatelessWidget {

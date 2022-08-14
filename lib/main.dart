@@ -4,6 +4,7 @@ import 'package:aithon/screens/recommendations_screen.dart';
 import 'package:aithon/screens/splash_screen.dart';
 import 'package:aithon/screens/student_registration.dart';
 import 'package:aithon/screens/profile_screen_s.dart';
+import 'package:aithon/screens/classdetails_screen_s.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -42,7 +43,7 @@ class Aithon extends StatelessWidget {
           // GetPage(name: "/create-class", page: () => CreateClass()),
           // GetPage(name: "/create-class", page: () => CreateClassroom()),
           // GetPage(name: "/view-class-teacher/:id", page: () => ClassDetailsTeacher()),
-          // GetPage(name: "/view-class-student/:id", page: () => ClassDetailsStudent()),
+          GetPage(name: "/view-class-student/:id", page: () => ClassDetailsStudent()),
           GetPage(name: "/profile-student", page: () => const StudentProfileSceen()),
           GetPage(name: "/recommendation", page: () => const RecommendationScreen()),
           // GetPage(name: "/list-assignment/:id", page: () => AssignmentListStudent()),
